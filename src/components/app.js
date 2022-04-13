@@ -3,6 +3,7 @@ import { Router, Location, Redirect } from "@reach/router";
 import ScrollToTopBtn from "./menu/ScrollToTop";
 import Header from "./menu/header";
 import Home from "./pages/home";
+import Explore from "./pages/explore";
 
 import { createGlobalStyle } from "styled-components";
 
@@ -38,6 +39,7 @@ const app = () => (
         <Home exact path="/">
           <Redirect to="/home" />
         </Home>
+        <Explore path="/explore" />
       </ScrollTop>
     </PosedRouter>
     <ScrollToTopBtn />

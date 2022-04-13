@@ -82,12 +82,12 @@ const Header = function ({ className }) {
               {showmenu && (
                 <div className="menu">
                   <div className="navbar-item">
-                    <NavLink to="/activity" onClick={() => btn_icon(!showmenu)}>
+                    <NavLink to="/explore" onClick={() => btn_icon(!showmenu)}>
                       Explore
                     </NavLink>
                   </div>
                   <div className="navbar-item">
-                    <NavLink to="/activity" onClick={() => btn_icon(!showmenu)}>
+                    <NavLink to="/login" onClick={() => btn_icon(!showmenu)}>
                       Login
                     </NavLink>
                   </div>
@@ -98,13 +98,13 @@ const Header = function ({ className }) {
             <Breakpoint xl>
               <div className="menu">
                 <div className="navbar-item">
-                  <NavLink to="/activity">
+                  <NavLink to="/explore">
                     Explore
                     <span className="lines"></span>
                   </NavLink>
                 </div>
                 <div className="navbar-item">
-                  <NavLink to="/activity">
+                  <NavLink to="/login">
                     Login
                     <span className="lines"></span>
                   </NavLink>
