@@ -1,8 +1,7 @@
 import React, { memo, useState } from "react";
 import NftCard from "./NftCard";
 
-//react functional component
-const ColumnNewRedux = () => {
+const ColumnNewRedux = ({ featured_nfts }) => {
   const [height, setHeight] = useState(0);
 
   const onImgLoad = ({ target: img }) => {
@@ -12,34 +11,10 @@ const ColumnNewRedux = () => {
     }
   };
 
-  const nfts = [
-    {
-      title: "Demo NFT",
-      price: 1.2,
-      likes: 2,
-      bid: 2,
-      max_bid: 4,
-    },
-    {
-      title: "Demo NFT",
-      price: 1.2,
-      likes: 2,
-      bid: 2,
-      max_bid: 4,
-    },
-    {
-      title: "Demo NFT",
-      price: 1.2,
-      likes: 2,
-      bid: 2,
-      max_bid: 4,
-    },
-  ];
-
   return (
     <div className="row">
-      {nfts &&
-        nfts.map((nft, index) => (
+      {featured_nfts &&
+        featured_nfts.map((nft, index) => (
           <NftCard
             nft={nft}
             key={index}
