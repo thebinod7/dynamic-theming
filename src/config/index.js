@@ -1,5 +1,6 @@
 export const LAYOUT_CONFIG = {
-  HOME_LAYOUT: "Home_One",
+  ACTIVE_THEME: "Default",
+  HOME_LAYOUT: "Default",
   EXPLORE_LAYOUT: "Default",
   LOGIN_LAYOUT: "Default",
 };

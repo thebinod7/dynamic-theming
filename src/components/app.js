@@ -4,7 +4,7 @@ import ScrollToTopBtn from "./menu/ScrollToTop";
 import Header from "./menu/header";
 import Home from "../funnel/home";
 import Explore from "./pages/explore";
-import Login from "./pages/login";
+import Login from "../funnel/login";
 
 import { createGlobalStyle } from "styled-components";
 

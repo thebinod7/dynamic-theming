@@ -1,49 +1,46 @@
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { settings } from './constants';
-import { useSelector, useDispatch } from 'react-redux';
-import * as selectors from '../../store/selectors';
-import { fetchNftShowcase } from "../../store/actions/thunks";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { settings } from "./constants";
 import { navigate } from "@reach/router";
-import api from "../../core/api";
 
-const SliderCarouselRedux = () => {
+const SliderCarouselRedux = ({ featured_nfts }) => {
+  const navigateTo = (link) => {
+    navigate(link);
+  };
 
-    const dispatch = useDispatch();
-    const nftsState = useSelector(selectors.nftShowcaseState);
-    const nfts = nftsState.data ? nftsState.data : [];
-    
-    useEffect(() => {
-        dispatch(fetchNftShowcase());
-    }, [dispatch]);
-
-    const navigateTo = (link) => {
-        navigate(link);
-    }
-
-    return (
-        <div className='nft-big'>
-          <Slider {...settings}>
-          {nfts && nfts.map( (nft, index) => (
-            <div onClick={() => navigateTo(nft.nft_link)} className='itm' index={index+1} key={index}>
-              <div className="nft_pic">                            
-                  <span>
-                      <span className="nft_pic_info">
-                          <span className="nft_pic_title">{nft.title}</span>
-                          <span className="nft_pic_by">{nft.author.username}</span>
-                      </span>
+  return (
+    <div className="nft-big">
+      <Slider {...settings}>
+        {featured_nfts &&
+          featured_nfts.map((nft, index) => (
+            <div
+              onClick={() => navigateTo(nft.price)}
+              className="itm"
+              index={index + 1}
+              key={index}
+            >
+              <div className="nft_pic">
+                <span>
+                  <span className="nft_pic_info">
+                    <span className="nft_pic_title">{nft.title}</span>
+                    <span className="nft_pic_by">{nft.title}</span>
                   </span>
-                  <div className="nft_pic_wrap">
-                      <img src={api.baseUrl + nft.preview_image.url} className="lazy img-fluid" alt=""/>
-                  </div>
+                </span>
+                <div className="nft_pic_wrap">
+                  <img
+                    src="/img/collections/coll-1.jpg"
+                    className="lazy img-fluid"
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
           ))}
-          </Slider>
-        </div>
-    );
-}
+      </Slider>
+    </div>
+  );
+};
 
 export default memo(SliderCarouselRedux);
