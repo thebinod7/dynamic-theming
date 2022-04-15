@@ -1,54 +1,54 @@
-import React, { memo, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import * as selectors from '../../store/selectors';
-import * as actions from '../../store/actions/thunks';
-import NftCard from './NftCard';
-import { clearNfts, clearFilter } from '../../store/actions';
+import React, { memo, useState } from "react";
+import NftCard from "./NftCard";
 
 const ColumnNewThreeColRedux = () => {
+  const [height, setHeight] = useState(0);
 
-    const dispatch = useDispatch();
-
-    const nftItems = useSelector(selectors.nftItems);
-
-    const [height, setHeight] = useState(0);
-
-    const onImgLoad = ({target:img}) => {
-        let currentHeight = height;
-        if(currentHeight < img.offsetHeight) {
-            setHeight(img.offsetHeight);
-        }
+  const onImgLoad = ({ target: img }) => {
+    let currentHeight = height;
+    if (currentHeight < img.offsetHeight) {
+      setHeight(img.offsetHeight);
     }
-    
-    useEffect(() => {
-        dispatch(actions.fetchNftsBreakdown());
-    }, [dispatch]);
+  };
 
-    //will run when component unmounted
-    useEffect(() => {
-        return () => {
-            dispatch(clearFilter());
-            dispatch(clearNfts());
-        }
-    },[dispatch]);
-    
-    const loadMore = () => {
-        dispatch(actions.fetchNftsBreakdown());
-    }
-    
+  const nftList = [
+    {
+      id: 1,
+      title: "Bored apes",
+      price: "1.3",
+      featuredImg: "/img/collections/coll-2.jpg",
+      likes: 4,
+    },
+    {
+      id: 1,
+      title: "Bored apes",
+      price: "1.4",
+      featuredImg: "/img/collections/coll-2.jpg",
+      likes: 5,
+    },
+    {
+      id: 1,
+      title: "Bored apes",
+      price: "0.4",
+      featuredImg: "/img/collections/coll-2.jpg",
+      likes: 7,
+    },
+  ];
+
   return (
-    <div className='row'>
-        {nftItems && nftItems.map( (nft, index) => (
-                <NftCard nft={nft} key={index} onImgLoad={onImgLoad} height={height} className="d-item col-lg-4 col-md-6 col-sm-6 col-xs-12 mb-4" />
-            ))}
-        { nftItems.length <= 20 &&
-            <div className='col-lg-12'>
-                <div className="spacer-single"></div>
-                <span onClick={loadMore} className="btn-main lead m-auto">Load More</span>
-            </div>
-        }
-    </div>              
-    );
-}
+    <div className="row">
+      {nftList &&
+        nftList.map((nft, index) => (
+          <NftCard
+            nft={nft}
+            key={index}
+            onImgLoad={onImgLoad}
+            height={height}
+            className="d-item col-lg-4 col-md-6 col-sm-6 col-xs-12 mb-4"
+          />
+        ))}
+    </div>
+  );
+};
 
 export default memo(ColumnNewThreeColRedux);

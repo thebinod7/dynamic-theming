@@ -42,7 +42,7 @@ const NftCard = ({
           </div>
         )}
         <div className="author_list_pp">
-          <span onClick={() => navigateTo(nft.author_link)}>
+          <span onClick={() => navigateTo("#")}>
             <img className="lazy" src="/img/author/author-1.jpg" alt="" />
             <i className="fa fa-check"></i>
           </span>
@@ -52,7 +52,7 @@ const NftCard = ({
             <span>
               <img
                 onLoad={onImgLoad}
-                src="/img/collections/coll-1.jpg"
+                src={nft.featuredImg}
                 className="lazy nft__item_preview"
                 alt=""
               />
@@ -65,7 +65,7 @@ const NftCard = ({
           </div>
         )}
         <div className="nft__item_info">
-          <span onClick={() => navigateTo(`${nft.nft_link}/${nft.id}`)}>
+          <span onClick={() => navigateTo(`#`)}>
             <h4>{nft.title}</h4>
           </span>
           {nft.status === "has_offers" ? (
@@ -83,7 +83,7 @@ const NftCard = ({
             </div>
           )}
           <div className="nft__item_action">
-            <span onClick={() => navigateTo(`${nft.bid_link}/${nft.id}`)}>
+            <span onClick={() => navigateTo(`#`)}>
               {nft.status === "on_auction" ? "Place a bid" : "Buy Now"}
             </span>
           </div>

@@ -3,7 +3,7 @@ import { Router, Location, Redirect } from "@reach/router";
 import ScrollToTopBtn from "./menu/ScrollToTop";
 import Header from "./menu/header";
 import Home from "../funnel/home";
-import Explore from "./pages/explore";
+import Explore from "../funnel/explore";
 import Login from "../funnel/login";
 
 import { createGlobalStyle } from "styled-components";
