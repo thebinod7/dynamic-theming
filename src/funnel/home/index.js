@@ -2,7 +2,7 @@ import React from "react";
 
 import DefaultHome from "../../components/pages/home";
 import HomeOne from "../../components/pages/home_one";
-import HomeFour from "../../components/pages/home_four";
+import HomeFour from "../../components/pages/home4";
 import { LAYOUT_CONFIG, MOCK_DATA } from "../../config";
 
 export default function Index() {

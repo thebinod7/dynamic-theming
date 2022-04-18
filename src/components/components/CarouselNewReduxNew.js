@@ -1,14 +1,9 @@
-import React, { memo, useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import React, { memo, useState } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Clock from "./Clock";
-import { carouselNew5 } from './constants';
-import * as selectors from '../../store/selectors';
-import { fetchNftsBreakdown } from "../../store/actions/thunks";
-import api from "../../core/api";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { carouselNew5 } from "./constants";
 
 const Outer = styled.div`
   display: flex;
@@ -18,70 +13,88 @@ const Outer = styled.div`
 `;
 
 const CarouselNewRedux = () => {
+  const [height, setHeight] = useState(0);
 
-    const dispatch = useDispatch();
-    const nftsState = useSelector(selectors.nftBreakdownState);
-    const nfts = nftsState.data ? nftsState.data : [];
-
-    const [height, setHeight] = useState(0);
-
-    const onImgLoad = ({target:img}) => {
-        let currentHeight = height;
-        if(currentHeight < img.offsetHeight) {
-            setHeight(img.offsetHeight);
-        }
+  const onImgLoad = ({ target: img }) => {
+    let currentHeight = height;
+    if (currentHeight < img.offsetHeight) {
+      setHeight(img.offsetHeight);
     }
-    
-    useEffect(() => {
-        dispatch(fetchNftsBreakdown());
-    }, [dispatch]);
+  };
 
-    return (
-        <div className='nft'>
-          <Slider {...carouselNew5}>
-          {nfts && nfts.map( (nft, index) => (
-            <div className='itm' index={index + 1} key={index}>
+  const nfts = [
+    {
+      authorImg: "/img/author/author-1.jpg",
+      featuredImg: "/img/collections/coll-1.jpg",
+      name: "Bored Ape",
+      tokenNumber: "#101",
+      collectionId: 201,
+      price: 1.2,
+    },
+    {
+      authorImg: "/img/author/author-1.jpg",
+      featuredImg: "/img/collections/coll-1.jpg",
+      name: "Bored Ape",
+      tokenNumber: "#102",
+      collectionId: 202,
+      price: 1.2,
+    },
+    {
+      authorImg: "/img/author/author-1.jpg",
+      featuredImg: "/img/collections/coll-1.jpg",
+      name: "Bored Ape",
+      tokenNumber: "#103",
+      collectionId: 203,
+      price: 1.5,
+    },
+  ];
+
+  return (
+    <div className="nft">
+      <Slider {...carouselNew5}>
+        {nfts &&
+          nfts.map((nft, index) => (
+            <div className="itm" index={index + 1} key={index}>
               <div className="d-item">
                 <div className="nft__item">
-                    { nft.deadline &&
-                        <div className="de_countdown">
-                            <Clock deadline={nft.deadline} />
-                        </div>
-                    }
-                    <div className="author_list_pp">
-                        <span onClick={()=> window.open("/home1", "_self")}>                                    
-                            <img className="lazy" src={api.baseUrl + nft.author.avatar.url} alt=""/>
-                            <i className="fa fa-check"></i>
-                        </span>
+                  <div className="author_list_pp">
+                    <span>
+                      <img className="lazy" src={nft.authorImg} alt="" />
+                      <i className="fa fa-check"></i>
+                    </span>
+                  </div>
+                  <div
+                    className="nft__item_wrap"
+                    style={{ height: `${height}px` }}
+                  >
+                    <Outer>
+                      <span>
+                        <img
+                          src={nft.featuredImg}
+                          className="lazy nft__item_preview"
+                          onLoad={onImgLoad}
+                          alt=""
+                        />
+                      </span>
+                    </Outer>
+                  </div>
+                  <div className="nft__item_info">
+                    <span>
+                      <h4>{nft.name}</h4>
+                    </span>
+                    <div className="nft__item_price">{nft.price} ETH</div>
+                    <div className="nft__item_action">
+                      <span>Buy Now</span>
                     </div>
-                    <div className="nft__item_wrap" style={{height: `${height}px`}}>
-                      <Outer>
-                        <span>
-                            <img src={api.baseUrl + nft.preview_image.url} className="lazy nft__item_preview" onLoad={onImgLoad} alt=""/>
-                        </span>
-                      </Outer>
-                    </div>
-                    <div className="nft__item_info">
-                        <span onClick={()=> window.open("/#", "_self")}>
-                            <h4>{nft.title}</h4>
-                        </span>
-                        <div className="nft__item_price">
-                            {nft.price} ETH<span>{nft.bid}/{nft.max_bid}</span>
-                        </div>
-                        <div className="nft__item_action">
-                            <span onClick={()=> window.open(nft.bid_link, "_self")}>Place a bid</span>
-                        </div>
-                        <div className="nft__item_like">
-                            <i className="fa fa-heart"></i><span>{nft.likes}</span>
-                        </div>                                                        
-                    </div> 
+                    <div className="nft__item_like"></div>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
-          </Slider>
-        </div>
-    );
-}
+      </Slider>
+    </div>
+  );
+};
 
 export default memo(CarouselNewRedux);

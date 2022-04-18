@@ -1,41 +1,53 @@
-import React, { memo, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import React, { memo } from "react";
 import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { settingsnew } from "./constants";
 import CustomSlide from "./CustomSlide";
-import * as selectors from '../../store/selectors';
-import { fetchHotCollections } from "../../store/actions/thunks";
-import api from "../../core/api";
 
 const CarouselCollectionRedux = () => {
-
-  const dispatch = useDispatch();
-  const hotCollectionsState = useSelector(selectors.hotCollectionsState);
-  const hotCollections = hotCollectionsState.data ? hotCollectionsState.data : [];
-
-  useEffect(() => {
-    dispatch(fetchHotCollections());
-}, [dispatch]);
+  const featured_nfts = [
+    {
+      authorImg: "/img/author/author-1.jpg",
+      featuredImg: "/img/collections/coll-3.jpg",
+      name: "Bored Ape",
+      tokenNumber: "#101",
+      collectionId: 201,
+    },
+    {
+      authorImg: "/img/author/author-1.jpg",
+      featuredImg: "/img/collections/coll-3.jpg",
+      name: "Bored Ape",
+      tokenNumber: "#102",
+      collectionId: 202,
+    },
+    {
+      authorImg: "/img/author/author-1.jpg",
+      featuredImg: "/img/collections/coll-3.jpg",
+      name: "Bored Ape",
+      tokenNumber: "#103",
+      collectionId: 203,
+    },
+  ];
 
   return (
-      <div className='nft'>
-        <Slider {...settingsnew}>
-          { hotCollections && hotCollections.map((item, index) => (
+    <div className="nft">
+      <Slider {...settingsnew}>
+        {featured_nfts &&
+          featured_nfts.map((item, index) => (
             <CustomSlide
               key={index}
               index={index + 1}
-              avatar={api.baseUrl + item.author.avatar.url}
-              banner={api.baseUrl + item.banner.url}
-              username={item.name}
-              uniqueId={item.unique_id}
-              collectionId={item.id}
+              authorImg={item.authorImg}
+              featuredImg={item.featuredImg}
+              name={item.name}
+              tokenNumber={item.tokenNumber}
+              collectionId={item.collectionId}
             />
           ))}
-        </Slider>
-      </div>
+      </Slider>
+    </div>
   );
-}
+};
 
 export default memo(CarouselCollectionRedux);

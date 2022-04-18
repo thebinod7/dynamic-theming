@@ -8,7 +8,7 @@ import Footer from "../components/footer";
 //IMPORT DYNAMIC STYLED COMPONENT
 import { StyledHeader } from "../Styles";
 //SWITCH VARIABLE FOR PAGE STYLE
-const theme = "GREY"; //LIGHT, GREY, RETRO
+const theme = "LIGHT"; //LIGHT, GREY, RETRO
 
 const homethree = ({ featured_nfts, new_nfts }) => (
   <div className="greyscheme">
